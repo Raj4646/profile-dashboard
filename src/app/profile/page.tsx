@@ -7,8 +7,9 @@ import LoadingSpinner from "@/app/components/Loading";
 
 export default function ProfilePage() {
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const [user, setUser] = React.useState(null);
+  
+  
+  const [user, setUser] = React.useState<any>("");
   const [nuser, setNuser] = React.useState({});
 
   const [isEditingName, setIsEditingName] = useState(false);
@@ -26,9 +27,7 @@ export default function ProfilePage() {
   const handleSave = async () => {
     try {
       setIsLoading(true);
-      console.log(nuser)
       const response = await axios.post("/api/users/updateuser", nuser);
-      console.log(response);
       getUserDetails();
       setIsEditingName(false);
       setIsEditingNumber(false);
@@ -38,6 +37,7 @@ export default function ProfilePage() {
       setIsEditingSkills(false);
       setIsLoading(false);
     } catch (error: any) {
+      setIsLoading(false);
       console.log("update failed", error.message);
     }
   };
@@ -71,7 +71,7 @@ export default function ProfilePage() {
                 Welcome back,
               </div>
               <div className="text-lg font-['Poppins'] font-medium text-[#373b5c] h-[63.25%]">
-                {user === null ? "" : `${user.user.name}`}
+                {user === "" ? "" : `${user.user.name}`}
               </div>
             </div>
             <img
@@ -110,7 +110,7 @@ export default function ProfilePage() {
                     Your Name
                   </div>
                   <div className="whitespace-nowrap text-xs font-['Outfit'] font-medium text-[rgba(34,_34,_34,_0.9)]">
-                    {user === null ? "" : `${user.user.name}`}
+                    {user === '' ? "" : `${user.user.name}`}
                     {isEditingName ? (
                       <>
                         
@@ -142,7 +142,7 @@ export default function ProfilePage() {
                   Email
                 </div>
                 <div className="text-xs font-['Outfit'] font-medium text-[rgba(34,_34,_34,_0.9)] self-stretch mb-2">
-                  {user === null ? "" : `${user.user.email}`}
+                  {user === '' ? "" : `${user.user.email}`}
                   {isEditingEmail ? (
                     <>
                       <input
@@ -173,7 +173,7 @@ export default function ProfilePage() {
                     Phone Number
                   </div>
                   <div className="whitespace-nowrap text-xs font-['Outfit'] font-medium text-[rgba(34,_34,_34,_0.9)]">
-                    {user === null ? "" : `${user.user.ph_no}`}
+                    {user === '' ? "" : `${user.user.ph_no}`}
                     {isEditingNumber ? (
                       <>
                         <input
@@ -236,7 +236,7 @@ export default function ProfilePage() {
                       {" "}
                     </div>
                     <div className="text-[#413b89] contents" id="AboutVishnu4">
-                      {user === null ? "" : `${user.user.name}`}
+                      {user === '' ? "" : `${user.user.name}`}
                     </div>
                   </div>
                   <div className="overflow-hidden bg-[#f0effa] flex flex-col w-10 shrink-0 h-4 items-center rounded-[64.587158203125px]">
@@ -247,7 +247,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <div className="text-xs font-['Outfit'] tracking-[0.11] text-[rgba(73,_69,_79,_0.8)]">
-                  {user === null ? "" : `${user.user.about}`}
+                  {user === '' ? "" : `${user.user.about}`}
                   {isEditingAbout ? (
                     <div>
                       <input
@@ -280,7 +280,7 @@ export default function ProfilePage() {
                   Skills
                 </div>
                 <div className="text-xs font-['Outfit'] font-medium text-[rgba(34,_34,_34,_0.9)] mr-4">
-                {user === null ? "" : `${user.user.skills}`}
+                {user === '' ? "" : `${user.user.skills}`}
                   {isEditingSkills ? (
                     <div className="flex flex-row">
                       <input
@@ -341,7 +341,7 @@ export default function ProfilePage() {
             <div className="border-solid border-[#cecece] overflow-hidden bg-white flex flex-row justify-start gap-12 items-center mb-6 mr-1 border rounded-[26.666658401489258px]">
               <div className="flex flex-col gap-1 w-3/5 items-start mt-1 mb-2 mr-0">
                 <div className="text-xs font-['Outfit'] tracking-[0.12] text-[rgba(73,_69,_79,_0.8)] ml-2 w-10">
-                {user === null ? "" : `${user.user.certifications}`}
+                {user === '' ? "" : `${user.user.certifications}`}
                   {isEditingCertifications ? (
                     <div className="flex flex-row">
                       <input
